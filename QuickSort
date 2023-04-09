@@ -1,0 +1,44 @@
+#include<iostream>
+using namespace std;
+int partion(int arr[],int s,int e){
+	 int pivit=arr[s];
+	 int cnt =0;
+	 for(int i=s+1;i<=e;i++){
+	 	if(arr[i]<=pivit){
+	 		cnt++;}
+	 	}
+	 	int pivitIndex=s+cnt;
+	 	swap(arr[pivitIndex],arr[s]);
+	 	int i=s,j=e;
+	 	while(i<pivitIndex	&&	j>pivitIndex){
+	 		while(arr[i]<pivit){
+	 			i++;}
+	 		while(arr[j]>pivit){
+	 			j--;}
+	 		if(i<pivitIndex	&&	j>pivitIndex){
+	 			swap(arr[i++],arr[j--]);}
+	 		}
+		return pivitIndex;
+}
+void quickSort(int arr[],int s,int e){
+	// base case
+	if(s>=e){
+		return;}
+	// Partation
+	int p=partion(arr,s,e);
+	// left array
+	quickSort(arr,s,p-1);
+	//Right array
+	quickSort(arr,p+1,e);
+}
+int main(){
+	int arr[]={4,3,2,6,5,7,8,1,9};
+	int n=9;
+	// Call Quick sort function
+	quickSort(arr,0,n-1);
+	// Print all sorted array
+	for(int i=0;i<n;i++){
+		cout<<arr[i]<<" ";}
+		cout<<endl;
+	
+	}
